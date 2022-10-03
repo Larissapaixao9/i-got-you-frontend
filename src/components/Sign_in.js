@@ -1,9 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
+import { FaGoogle,FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
 import Input from '../items/Input'
+import Button from '../items/Button'
+import Icons from '../items/Icons'
+import { Link, Navigate } from 'react-router-dom'
+import Sign_up from './Sign_up'
+
 
 export default function Sign_in() {
+  const IconBackground = "rgba(255,255,255,0.15)";
   return (
     <MainComponent>
       <WelcomeText>Olá, meu chapa</WelcomeText>
@@ -11,6 +17,27 @@ export default function Sign_in() {
         <Input type="text" placeholder="email"/>
         <Input type="password" placeholder="senha"/>
       </InputContainer>
+      <ButtonContainer>
+          <Button content="Entrar"/>
+        </ButtonContainer>
+
+        <Signup_with_text>Ou entre com</Signup_with_text>
+        <Horizontal />
+        <IconContainer>
+          <Icons color={IconBackground}>
+            <FaGoogle />
+          </Icons>
+          <Icons color={IconBackground}>
+            <FaInstagram />
+          </Icons>
+          <Icons color={IconBackground}>
+            <FaFacebook />
+          </Icons>
+        </IconContainer>
+        <Link to="sign_up">
+        <Sign_up_text >Cadastro</Sign_up_text>
+        </Link>
+      
     </MainComponent>
   )
 }
@@ -30,6 +57,10 @@ const MainComponent = styled.div`
     color:#fff;
     text-transform: uppercase;
     letter-spacing: 0.4rem;
+
+    Link{
+      text-decoration: none;
+    }
 `
 
 const WelcomeText = styled.h2`
@@ -43,4 +74,38 @@ const InputContainer = styled.div`
     align-items: center;
     height: 20%;
     width:100%;
+`
+
+const ButtonContainer = styled.div`
+    margin: 1rem 0 2rem 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+const Signup_with_text = styled.h5`
+    cursor:pointer;
+`
+
+const Horizontal = styled.div`
+    width:90%;
+    height: 0.3rem;
+    border-radius: 0.8rem;
+    border: none;
+    margin: 1.5rem 0 1rem 0;
+    background: linear-gradient(to right, #14163c 0%, #03217b 75%);
+    backdrop-filter: blur(25px);
+`
+
+const IconContainer = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    margin: 2rem 0 3rem 0;
+    width:80%auto;
+
+`
+
+const Sign_up_text = styled.h4`
+    cursor: pointer;
 `

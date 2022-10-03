@@ -26,7 +26,11 @@ const InputStyle = styled.input`
         border-radius: 2rem;
     }
     &::placeholder{
-        
+        color:#002000;
+        font-size: 1rem;
+        font-weight: 100;
     }
-
 `
+
+
+
