@@ -13,6 +13,7 @@ const InputStyle = styled.input`
     box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
     border-radius: 2rem;
     height: 3rem;
+    width: 80%;
     padding: 1rem;
     border: none;
     outline: none;

@@ -9,7 +9,7 @@ import Sign_up from './Sign_up'
 
 
 export default function Sign_in() {
-  const IconBackground = "rgba(255,255,255,0.15)";
+  const IconBackground = "linear-gradient(to right, #A12AC4 0%, #ED586C 40%, F0A853 100%)";
   return (
     <MainComponent>
       <WelcomeText>Olá, meu chapa</WelcomeText>
@@ -60,7 +60,45 @@ const MainComponent = styled.div`
 
     Link{
       text-decoration: none;
+      color:white;
     }
+
+    @media only screen and (max-width:320px){
+      width: 80vw;
+      height: 90vh;
+
+      hr{
+        margin-bottom: 0.3rem;
+      }
+      h4{
+        font-size: small;
+      }
+    }
+
+    @media only screen and (min-width:360px){
+      width: 80vw;
+      height: 90vh;
+
+      h4{
+        font-size: small;
+      }
+    }
+
+    @media only screen and (min-width:411){
+      width: 80vw;
+      height: 90vh;
+    }
+
+    @media only screen and (min-width:1024){
+      width: 70vw;
+      height: 50vh;
+    }
+
+    @media only screen and (min-width:768){
+      width: 80vw;
+      height: 80vh;
+    }
+
 `
 
 const WelcomeText = styled.h2`
@@ -88,7 +126,7 @@ const Signup_with_text = styled.h5`
     cursor:pointer;
 `
 
-const Horizontal = styled.div`
+const Horizontal = styled.hr`
     width:90%;
     height: 0.3rem;
     border-radius: 0.8rem;

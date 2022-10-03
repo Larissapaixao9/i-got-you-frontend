@@ -50,6 +50,41 @@ const MainComponent = styled.div`
     Link{
       text-decoration: none;
     }
+    @media only screen and (max-width:320px){
+      width: 80vw;
+      height: 90vh;
+
+      hr{
+        margin-bottom: 0.3rem;
+      }
+      h4{
+        font-size: small;
+      }
+    }
+
+    @media only screen and (min-width:360px){
+      width: 80vw;
+      height: 90vh;
+
+      h4{
+        font-size: small;
+      }
+    }
+
+    @media only screen and (min-width:411){
+      width: 80vw;
+      height: 90vh;
+    }
+
+    @media only screen and (min-width:1024){
+      width: 70vw;
+      height: 50vh;
+    }
+
+    @media only screen and (min-width:768){
+      width: 80vw;
+      height: 80vh;
+    }
 `
 
 const WelcomeText = styled.h2`

@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 import React from 'react'
 
-export default function Button({ content }) {
+export default function Button({ content, color }) {
   return (
-    <ButtonStyle>
+    <ButtonStyle Background={color}>
         {content}
     </ButtonStyle>
   )
