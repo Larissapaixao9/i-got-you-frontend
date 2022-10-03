@@ -12,6 +12,7 @@ export default function Sign_up() {
     <MainComponent>
       <WelcomeText>Bora cadastrar</WelcomeText>
       <InputContainer>
+      <Input type="text" placeholder="nome"/>
         <Input type="text" placeholder="email"/>
         <Input type="password" placeholder="senha"/>
         <Input type="password" placeholder="confirmar senha"/>
@@ -22,17 +23,7 @@ export default function Sign_up() {
 
         <Signup_with_text>Ou entre com</Signup_with_text>
         <Horizontal />
-        <IconContainer>
-          <Icons color={IconBackground}>
-            <FaGoogle />
-          </Icons>
-          <Icons color={IconBackground}>
-            <FaInstagram />
-          </Icons>
-          <Icons color={IconBackground}>
-            <FaFacebook />
-          </Icons>
-        </IconContainer>
+    
         <Link to="/">
         <Sign_up_text >LOgin</Sign_up_text>
         </Link>
@@ -70,7 +61,7 @@ const InputContainer = styled.div`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 20%;
+    height: 40%;
     width:100%;
 `
 
