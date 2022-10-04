@@ -2,9 +2,14 @@ import styled from "styled-components";
 
 import React from 'react'
 
-export default function Input({ type, placeholder }) {
+export default function Input({ type, placeholder, id, value, onChange }) {
   return (
-    <InputStyle type={type} placeholder={placeholder} />
+    <InputStyle type={type} 
+    placeholder={placeholder} 
+    id={id}
+    value={value}
+    onChange={onChange}
+    />
   )
 }
 

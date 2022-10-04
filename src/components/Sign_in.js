@@ -1,26 +1,74 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
 import { FaGoogle,FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
 import Input from '../items/Input'
 import Button from '../items/Button'
 import Icons from '../items/Icons'
-import { Link, Navigate } from 'react-router-dom'
-import Sign_up from './Sign_up'
-
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Sign_in() {
+
+  const base_URL = `http://localhost:4001`
+
+  const URL_login = `${base_URL}/sign-in`
+
+  const [loading, setLoading] = React.useState(false)
+
+  const navigate = useNavigate()
+
+  const [user, setUser]=React.useState({
+    email:"",
+    password:""
+  })
+
+  async function submit_login(event){
+    console.log(event)
+
+    event.preventDefault()
+
+    setLoading(true)
+
+    try{
+      const promise = await axios.post(URL_login,user)
+      console.log(promise.data)
+      navigate('/home')
+      
+    }
+    catch(err){
+      setLoading(false)
+      console.log(err.response.data)
+      alert('erro no login')
+      
+    }
+  }
+
   const IconBackground = "linear-gradient(to right, #A12AC4 0%, #ED586C 40%, F0A853 100%)";
   return (
     <MainComponent>
       <WelcomeText>Olá, meu chapa</WelcomeText>
+      <form onSubmit={submit_login}>
       <InputContainer>
-        <Input type="text" placeholder="email"/>
-        <Input type="password" placeholder="senha"/>
-      </InputContainer>
-      <ButtonContainer>
-          <Button content="Entrar"/>
-        </ButtonContainer>
 
+        <Input id='email' 
+        value={user.email} 
+        onChange={(event)=>setUser({...user, email:event.target.value})} 
+        type="text" 
+        placeholder="email"/>
+
+        <Input type="password" 
+        placeholder="senha"
+        id='password'
+        value={user.password}
+        onChange={(event)=>setUser({ ...user, password:event.target.value })}
+        />
+      </InputContainer>
+      
+      <ButtonContainer>
+          <Button loading={loading} content="Entrar"/>
+        </ButtonContainer>
+      </form>
         <Signup_with_text>Ou entre com</Signup_with_text>
         <Horizontal />
         <IconContainer>
@@ -58,6 +106,23 @@ const MainComponent = styled.div`
     text-transform: uppercase;
     letter-spacing: 0.4rem;
 
+    form{
+      height: 160vh;
+    width:60vw;
+      display:flex;
+    align-items:center;
+    flex-direction:column;
+
+    input{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      height: 20%;
+      width:100%;
+      padding: 1.5rem;
+    }
+    }
     Link{
       text-decoration: none;
       color:white;
@@ -110,7 +175,7 @@ const InputContainer = styled.div`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 20%;
+    height: 40%;
     width:100%;
 `
 
@@ -146,4 +211,5 @@ const IconContainer = styled.div`
 
 const Sign_up_text = styled.h4`
     cursor: pointer;
+   
 `

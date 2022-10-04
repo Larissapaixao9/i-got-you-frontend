@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { ThreeDots } from "react-loader-spinner";
 
 import React from 'react'
 
-export default function Button({ content, color }) {
+export default function Button({ content, color, loading }) {
   return (
     <ButtonStyle Background={color}>
-        {content}
+        {loading ? <ThreeDots color='#FFF' height='13px' width='51px'/>:<div>{content}</div>}
     </ButtonStyle>
   )
 }
@@ -20,4 +21,6 @@ const ButtonStyle = styled.button`
     color:white;
     border-radius: 2rem;
     cursor:pointer;
+    justify-content: center;
+    align-items: center;
 `

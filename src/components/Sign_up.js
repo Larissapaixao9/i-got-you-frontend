@@ -2,31 +2,96 @@ import React from 'react'
 import styled from 'styled-components'
 import { FaGoogle,FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
 import Input from '../items/Input'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import Button from '../items/Button'
-import Icons from '../items/Icons'
-import { Link, Navigate } from 'react-router-dom'
+import axios from 'axios'
 
 export default function Sign_up() {
+
+  const base_URL = `http://localhost:4001`
+
+  const URL_login = `${base_URL}/sign-up`
+
+  const [loading, setLoading] = React.useState(false)
+
+  const navigate = useNavigate()
+
+  const [user, setUser]=React.useState({
+    email:"",
+    name:"",
+    password:"",
+    confirm_password:""
+  })
+
+  async function submit_logup(event){
+    console.log(event)
+
+    event.preventDefault()
+
+    setLoading(true)
+
+    try{
+      const promise = await axios.post(URL_login,user)
+      console.log(promise.data)
+      navigate('/')
+      
+    }
+    catch(err){
+      setLoading(false)
+      console.log(err.response.data)
+      alert('erro no cadastro')
+      
+    }
+  }
+
   const IconBackground = "rgba(255,255,255,0.15)";
   return (
     <MainComponent>
       <WelcomeText>Bora cadastrar</WelcomeText>
+      <form onSubmit={submit_logup}>
       <InputContainer>
-      <Input type="text" placeholder="nome"/>
-        <Input type="text" placeholder="email"/>
-        <Input type="password" placeholder="senha"/>
-        <Input type="password" placeholder="confirmar senha"/>
+      <Input 
+      type="text" 
+      placeholder="nome"
+      id='name'
+      value={user.name}
+      onChange={(event)=>setUser({ ...user, name:event.target.value })}
+      />
+
+        <Input type="text" 
+        placeholder="email"
+        id='email'
+        value={user.email}
+        onChange={(event)=>setUser({ ...user, email:event.target.value })}
+        />
+
+        <Input type="password" 
+        placeholder="senha"
+        id='password'
+        value={user.password}
+        onChange={(event)=>setUser({ ...user, password:event.target.value })}
+        />
+
+        <Input type="password" 
+        placeholder="confirmar senha"
+        id='confirmPassword'
+        value={user.confirm_password}
+        onChange={(event)=>setUser({ ...user, confirm_password:event.target.value })}
+        />
+
       </InputContainer>
       <ButtonContainer>
-          <Button content="Cadastrar"/>
+          <Button type='submit' content="Cadastrar"/>
         </ButtonContainer>
 
-        <Signup_with_text>Ou entre com</Signup_with_text>
+      </form>
+      <Link to="/">
+        <Signup_with_text>Já tem cadastro? Clique aqui</Signup_with_text>
+        </Link>
         <Horizontal />
     
-        <Link to="/">
-        <Sign_up_text >LOgin</Sign_up_text>
-        </Link>
+        <Sign_up_text ></Sign_up_text>
+        
       
     </MainComponent>
   )
@@ -47,8 +112,32 @@ const MainComponent = styled.div`
     text-transform: uppercase;
     letter-spacing: 0.4rem;
 
+    form{
+      height: 160vh;
+    width:60vw;
+      display:flex;
+    align-items:center;
+    flex-direction:column;
+
+    input{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      height: 20%;
+      width:100%;
+      padding: 1.5rem;
+      margin-top:0.4rem;
+      margin-bottom: 0.6rem;
+    }
+    button{
+      margin-top: 2rem;
+    }
+    }
+
     Link{
       text-decoration: none;
+      color:#FFF
     }
     @media only screen and (max-width:320px){
       width: 80vw;
@@ -110,6 +199,7 @@ const ButtonContainer = styled.div`
 
 const Signup_with_text = styled.h5`
     cursor:pointer;
+    color: #FFF;
 `
 
 const Horizontal = styled.div`
