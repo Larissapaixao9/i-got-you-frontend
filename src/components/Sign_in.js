@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 import { FaGoogle,FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
 import Input from '../items/Input'
 import Button from '../items/Button'
 import Icons from '../items/Icons'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
-import { ThreeDots } from "react-loader-spinner";
+import { Link, useNavigate } from 'react-router-dom'
+import { user_context } from '../contexts/user_context'
 
 export default function Sign_in() {
+
+  const context = useContext(user_context)
 
   const base_URL = `http://localhost:4001`
 
@@ -33,13 +35,16 @@ export default function Sign_in() {
     try{
       const promise = await axios.post(URL_login,user)
       console.log(promise.data)
+      const { name } = await promise.data.name
+      console.log(name)
+      context.setName(promise.data.name)
       navigate('/home')
       
     }
     catch(err){
       setLoading(false)
-      console.log(err.response.data)
       alert('erro no login')
+      console.log(err.response.data)
       
     }
   }

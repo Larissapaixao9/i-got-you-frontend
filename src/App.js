@@ -5,10 +5,16 @@ import Home from './components/Home';
 import Sign_up from './components/Sign_up';
 import Sign_in from './components/Sign_in';
 import Diagnostic from './components/Diagnostic';
+import { user_context } from '../src/contexts/user_context'
 
 
 function App() {
+
+  const [name, setName] = React.useState()
+  //const name = localStorage.getItem("name")
+
   return (
+    <user_context.Provider value={{name, setName}}>
     <BrowserRouter>
       <Routes>
         
@@ -19,6 +25,7 @@ function App() {
 
       </Routes>
     </BrowserRouter>
+    </user_context.Provider>
   );
 }
 
