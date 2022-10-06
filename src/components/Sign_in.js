@@ -127,6 +127,7 @@ const MainComponent = styled.div`
       width:100%;
       padding: 1.5rem;
     }
+   
     }
     Link{
       text-decoration: none;
