@@ -6,7 +6,7 @@ import React from 'react'
 export default function Button({ content, color, loading }) {
   return (
     <ButtonStyle Background={color}>
-        {loading ? <div ><ThreeDots textAlign= 'center' color='#FFF' height='13px' width='51px'/></div>:<div>{content}</div>}
+        {loading ? <div ><ThreeDots color='#FFF' height='13px' width='51px'/></div>:<div>{content}</div>}
     </ButtonStyle>
   )
 }
@@ -24,12 +24,9 @@ const ButtonStyle = styled.button`
     justify-content: center;
     align-items: center;
     text-align: center;
+    
     div{
       justify-content: center;
-      align-items: center;
-      text-align: center;
-      margin: 0 auto;
-      
     }
     
 `

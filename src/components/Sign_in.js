@@ -38,6 +38,7 @@ export default function Sign_in() {
       const { name } = await promise.data.name
       console.log(name)
       context.setName(promise.data.name)
+      localStorage.setItem("token", "Bearer "+ promise.data.token)
       navigate('/home')
       
     }

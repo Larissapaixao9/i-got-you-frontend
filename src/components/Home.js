@@ -5,6 +5,9 @@ import { user_context } from '../contexts/user_context'
 import Diary_input from '../items/diary_input'
 import Button from '../items/Button'
 import axios from 'axios'
+import Swal from 'sweetalert2'
+import giphy from '../images/giphy-unscreen.gif'
+
 
 export default function Home() {
 
@@ -26,17 +29,42 @@ export default function Home() {
     setLoading(true)
     
     try {
-      const promise = await axios.post(URL_register_thought,thought)
-
+      const promise = await axios.post(URL_register_thought,thought, {
+        headers:{
+          "Authorization": localStorage.getItem("token")
+        }
+      })
+      setLoading(false)
       console.log(promise.data)
 
+      Swal.fire({
+        title: 'Registrado com sucesso. veja o resultado em diagnósticos.',
+        width: 600,
+        padding: '3em',
+        color: '#716add',
+        background: '#fff url(src/images/background_1.png)',
+        backdrop: `
+          rgba(0,0,140,0.4)
+          url(${giphy})
+          left top
+          no-repeat
+        `,
+        footer: '<a href="/diagnostic">Veja o resultado do seu humor</a>'
+
+      })
       
     } catch (error) {
 
       setLoading(false)
+
       console.log(error)
-      alert('erro no registro')
-      
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Opa...',
+        text: 'Algo deu errado!',
+        footer: '<h4>Tente novamente</h4>'
+      })
     }
   }
 
