@@ -97,8 +97,6 @@ const MainComponent = styled.div`
     color:#fff;
     text-transform: uppercase;
     letter-spacing: 0.4rem;
-    
-
 `
 const diaryCOntainer = styled.div`
   display: flex;
