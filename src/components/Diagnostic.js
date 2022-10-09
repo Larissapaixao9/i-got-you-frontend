@@ -4,6 +4,9 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import Button from '../items/Button'
 import { Link, useNavigate } from 'react-router-dom'
+import ReactPlayer from 'react-player'
+import * as videoFactory from '../factory/videos_factory'
+
 import Logout from './Logout'
 
 export default function Diagnostic() {
@@ -12,9 +15,13 @@ export default function Diagnostic() {
 
   const URL_get_diagnostic = `${base_URL}/diagnostic`
 
-  const [result, setResult] = React.useState()
+  const [result, setResult] = React.useState(null)
 
   const [loading, setLoading] = React.useState(false)
+
+  const [url, setUrl] = React.useState(null)
+
+  let video;
 
 
 
@@ -31,7 +38,13 @@ export default function Diagnostic() {
       try {
         console.log(promise.data)
         setResult(promise.data)
-        
+        if(promise.data.result=='bom humor'){
+          setUrl(await videoFactory.case1_songs())
+        }
+
+        if(promise.data.result=='mau humor'){
+          setUrl(await videoFactory.case2_songs())
+        }
       } catch (error) {
         
         console.log(error)
@@ -46,13 +59,37 @@ export default function Diagnostic() {
     get_results()
   }, [])
 
+
+  if(result!=null){
+    get_video()
+  }
+  async function get_video(){
+      if(result.result=='bom humor'){
+        video=await videoFactory.case1_songs()
+      }
+      else{
+        video = await videoFactory.case2_songs()
+      }
+  }
+  console.log(url)
+ 
   return (
     <MainComponent>
       <DiagnosticText>{result? 'Veja abaixo seu diagnóstico' : 'Voce ainda não possui diagnosticos'}</DiagnosticText>
     <DiagnosticSquare>
       <h3> {result? `Hoje você está com ${result.result}` : "Nada para mostrar"}</h3>
       <h3>{result?.element_with_highest_frequency? `A palavra digitada com maior frequência foi ${result.element_with_highest_frequency}`:"" }</h3>
-
+      <ReactPlayer
+  url={url}
+  config={{
+    youtube: {
+      playerVars: { showinfo: 1 }
+    },
+    facebook: {
+      appId: '12345'
+    }
+  }}
+/>
     </DiagnosticSquare>
     <ButtonContainer>
       <Link to='/home' style={linkStyle}><Button content="Ir para home"/></Link>
