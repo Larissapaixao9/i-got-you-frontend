@@ -36,6 +36,5 @@ it('deve retornar erro se não existir cadastro', () => {
     expect(text).to.contains("Error creating email ou senha não encontrado")
   })
 })
-
 })
 

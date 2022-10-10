@@ -6,8 +6,8 @@ import Button from '../items/Button'
 import { Link, useNavigate } from 'react-router-dom'
 import ReactPlayer from 'react-player'
 import * as videoFactory from '../factory/videos_factory'
+import Logout from '../components/Logout'
 
-import Logout from './Logout'
 
 export default function Diagnostic() {
 
@@ -21,8 +21,16 @@ export default function Diagnostic() {
 
   const [url, setUrl] = React.useState(null)
 
+  const [logout, setLogout] = React.useState(false)
+
+  const navigate = useNavigate()
+
   let video;
 
+  function End_session() {
+    localStorage.removeItem("token");
+    navigate("/");
+}
 
 
   React.useEffect(()=>{
@@ -72,6 +80,8 @@ export default function Diagnostic() {
       }
   }
   console.log(url)
+
+ 
  
   return (
     <MainComponent>
@@ -98,7 +108,7 @@ export default function Diagnostic() {
     </DiagnosticSquare>
     <ButtonContainer>
       <Link to='/home' style={linkStyle}><Button content="Home"/></Link>
-      <Button content="sair do app" />
+      <ButtonStyle onClick={End_session}>Sair do app</ButtonStyle>
       
     </ButtonContainer>
     </MainComponent>
