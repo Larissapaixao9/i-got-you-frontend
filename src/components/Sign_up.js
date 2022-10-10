@@ -94,7 +94,7 @@ export default function Sign_up() {
         </ButtonContainer>
 
       </form>
-      <Link to="/">
+      <Link to="/" style={{textDecoration: 'none', color:'white', marginBottom:'1%', textAlign:'center'}}>
         <Signup_with_text>Já tem cadastro? Clique aqui</Signup_with_text>
         </Link>
         <Horizontal />
@@ -158,6 +158,7 @@ const MainComponent = styled.div`
       h4{
         font-size: small;
       }
+     
     }
 
     @media only screen and (min-width:360px){
@@ -187,6 +188,7 @@ const MainComponent = styled.div`
 
 const WelcomeText = styled.h2`
     margin: 2rem 0 2rem 0;
+    text-align: center;
 `
 
 const InputContainer = styled.div`
@@ -231,4 +233,5 @@ const IconContainer = styled.div`
 
 const Sign_up_text = styled.h4`
     cursor: pointer;
+    text-align: center;
 `

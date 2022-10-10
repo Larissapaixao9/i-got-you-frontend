@@ -78,7 +78,7 @@ export default function Diagnostic() {
       <DiagnosticText>{result? 'Veja abaixo seu diagnóstico' : 'Voce ainda não possui diagnosticos'}</DiagnosticText>
     <DiagnosticSquare>
       <h3> {result? `Hoje você está com ${result.result}` : "Nada para mostrar"}</h3>
-      <h5>Musica recomendada para hoje:</h5>
+      <h4>{result? 'Musica recomendada para hoje:' : 'Não conseguimos identificar seu humor :('}</h4>
       <h3>{result?.element_with_highest_frequency? `A palavra digitada com maior frequência foi ${result.element_with_highest_frequency}`:"" }</h3>
       <ReactPlayer
 
@@ -123,6 +123,7 @@ const MainComponent = styled.div`
 `
 const DiagnosticText = styled.h4`
     margin: 2rem 0 2rem 0;
+    text-align: center;
 `
 const DiagnosticSquare = styled.div`
 
@@ -136,6 +137,37 @@ display:flex;
     color:#fff;
     padding: 1rem;
     margin-bottom: 0.4rem;
+
+    h3{
+      margin-bottom: 1rem;
+      color:#000;
+      animation: pulse 0.7s infinite;
+      animation-direction: alternate;
+      -webkit-animation-name: pulse;
+      animation-name: pulse;
+
+      @-webkit-keyframes pulse {
+  0% {
+    -webkit-transform: scale(1);
+    -webkit-filter: brightness(100%);
+  }
+  100% {
+    -webkit-transform: scale(1.1);
+    -webkit-filter: brightness(200%);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    filter: brightness(100%);
+  }
+  100% {
+    transform: scale(1.1);
+    filter: brightness(200%);
+  }
+}
+    }
 `
 
 const ButtonContainer = styled.div`

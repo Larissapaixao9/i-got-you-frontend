@@ -133,7 +133,7 @@ export default function Sign_in() {
       />
           
         </IconContainer>
-        <Link to="sign_up">
+        <Link to="sign_up" style={{textDecoration: 'none', color:'white', marginBottom:'1%'}}>
         <Sign_up_text >Cadastro</Sign_up_text>
         </Link>
       
@@ -220,6 +220,7 @@ const MainComponent = styled.div`
 
 const WelcomeText = styled.h2`
     margin: 2rem 0 2rem 0;
+    text-align: center;
 `
 
 const InputContainer = styled.div`
