@@ -11,7 +11,7 @@ import giphy from '../images/giphy-unscreen.gif'
 
 export default function Home() {
 
-  const base_URL = `http://localhost:4001`
+  const base_URL = `http://localhost:4000`
 
   const URL_register_thought = `${base_URL}/home`
 

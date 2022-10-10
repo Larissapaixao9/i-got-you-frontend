@@ -5,10 +5,14 @@ import Input from '../items/Input'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import Button from '../items/Button'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
+//https://i-got-you-backend.herokuapp.com/
 export default function Sign_up() {
 
-  const base_URL = `http://localhost:4001`
+  //const base_URL = `http://i-got-you-database.herokuapp.com`
+
+  const base_URL = `http://localhost:4000`
 
   const URL_login = `${base_URL}/sign-up`
 
@@ -39,7 +43,12 @@ export default function Sign_up() {
     catch(err){
       setLoading(false)
       console.log(err.response.data)
-      alert('erro no cadastro')
+      Swal.fire({
+        icon: 'error',
+        title: 'Opa...',
+        text: 'Erro no cadastro!',
+        footer: '<h4>Tente novamente</h4>'
+      })
       
     }
   }

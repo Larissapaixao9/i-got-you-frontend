@@ -7,12 +7,19 @@ import Button from '../items/Button'
 import Icons from '../items/Icons'
 import { Link, useNavigate } from 'react-router-dom'
 import { user_context } from '../contexts/user_context'
+import Swal from 'sweetalert2'
+import { GoogleLogin } from 'react-google-login';
+import { gapi } from 'gapi-script';
+
 
 export default function Sign_in() {
 
   const context = useContext(user_context)
 
-  const base_URL = `http://localhost:4001`
+  //const base_URL = `https://i-got-you-backend.herokuapp.com`
+
+  const base_URL = `http://localhost:4000`
+
 
   const URL_login = `${base_URL}/sign-in`
 
@@ -20,10 +27,22 @@ export default function Sign_in() {
 
   const navigate = useNavigate()
 
+  const clientId = '221846276514-k2ort1c1fu3m88gu9d39kldbr7pnk69c.apps.googleusercontent.com'
+
   const [user, setUser]=React.useState({
     email:"",
     password:""
   })
+
+  useEffect(() => {
+    const initClient = () => {
+          gapi.client.init({
+          clientId: clientId,
+          scope: 'https://www.googleapis.com/auth/userinfo.profile'
+        });
+     };
+     gapi.load('client:auth2', initClient);
+ });
 
   async function submit_login(event){
     console.log(event)
@@ -44,9 +63,35 @@ export default function Sign_in() {
     }
     catch(err){
       setLoading(false)
-      alert('erro no login')
+      Swal.fire({
+        icon: 'error',
+        title: 'Opa...',
+        text: 'Algo deu errado!',
+        footer: '<h4>Tente novamente</h4>'
+      })
       console.log(err.response.data)
       
+    }
+  }
+
+  const responseGoogle = (response)=>{
+    console.log(response)
+    const { profileObj: { name, email, googleId } } = response
+    let create_user_with_google
+
+    if(email.length>0){
+        create_user_with_google=axios.post('http://localhost:4000/sign-up',{
+        name:name,
+        email:email,
+        password: googleId,
+        confirm_password:googleId
+      })
+    }
+    if(create_user_with_google){
+      setUser({
+        email:email,
+        password:googleId
+      })
     }
   }
 
@@ -78,15 +123,15 @@ export default function Sign_in() {
         <Signup_with_text>Ou entre com</Signup_with_text>
         <Horizontal />
         <IconContainer>
-          <Icons color={IconBackground}>
-            <FaGoogle />
-          </Icons>
-          <Icons color={IconBackground}>
-            <FaInstagram />
-          </Icons>
-          <Icons color={IconBackground}>
-            <FaFacebook />
-          </Icons>
+        <GoogleLogin
+          clientId={clientId}
+          buttonText="Sign in with Google"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={'single_host_origin'}
+          isSignedIn={true}
+      />
+          
         </IconContainer>
         <Link to="sign_up">
         <Sign_up_text >Cadastro</Sign_up_text>

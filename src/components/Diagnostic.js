@@ -11,7 +11,7 @@ import Logout from './Logout'
 
 export default function Diagnostic() {
 
-  const base_URL = `http://localhost:4001`
+  const base_URL = `http://localhost:4000`
 
   const URL_get_diagnostic = `${base_URL}/diagnostic`
 
@@ -78,9 +78,13 @@ export default function Diagnostic() {
       <DiagnosticText>{result? 'Veja abaixo seu diagnóstico' : 'Voce ainda não possui diagnosticos'}</DiagnosticText>
     <DiagnosticSquare>
       <h3> {result? `Hoje você está com ${result.result}` : "Nada para mostrar"}</h3>
+      <h5>Musica recomendada para hoje:</h5>
       <h3>{result?.element_with_highest_frequency? `A palavra digitada com maior frequência foi ${result.element_with_highest_frequency}`:"" }</h3>
       <ReactPlayer
+
   url={url}
+  width='100%'
+  height='100%'
   config={{
     youtube: {
       playerVars: { showinfo: 1 }
@@ -88,11 +92,12 @@ export default function Diagnostic() {
     facebook: {
       appId: '12345'
     }
+
   }}
 />
     </DiagnosticSquare>
     <ButtonContainer>
-      <Link to='/home' style={linkStyle}><Button content="Ir para home"/></Link>
+      <Link to='/home' style={linkStyle}><Button content="Home"/></Link>
       <Button content="sair do app" />
       
     </ButtonContainer>
@@ -124,17 +129,19 @@ const DiagnosticSquare = styled.div`
 display:flex;
     align-items:center;
     flex-direction:column;
-    height: 49vh;
+    height: 60vh;
     width:80vw;
     background: pink;
     border-radius:10px ;
     color:#fff;
+    padding: 1rem;
+    margin-bottom: 0.4rem;
 `
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width:36vw;
+
 
 
   Link{
@@ -153,3 +160,25 @@ const linkStyle = {
   width:"100%"
 
 }
+
+const ButtonStyle = styled.button`
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    width: 100%;
+    height: 3rem;
+    border: none;
+    color:white;
+    border-radius: 2rem;
+    cursor:pointer;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left:0.5rem;
+    margin-right: 0.5rem;
+    
+    div{
+      justify-content: center;
+    }
+    
+`
