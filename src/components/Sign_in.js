@@ -134,7 +134,7 @@ export default function Sign_in() {
           
         </IconContainer>
         <Link to="sign_up" style={{textDecoration: 'none', color:'white', marginBottom:'1%'}}>
-        <Sign_up_text >Cadastro</Sign_up_text>
+        <Sign_up_text id='cadastro'>Cadastro</Sign_up_text>
         </Link>
       
     </MainComponent>

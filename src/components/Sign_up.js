@@ -90,7 +90,7 @@ export default function Sign_up() {
 
       </InputContainer>
       <ButtonContainer>
-          <Button type='submit' content="Cadastrar"/>
+          <Button id='cadastrar' type='submit' content="Cadastrar"/>
         </ButtonContainer>
 
       </form>
